@@ -35,7 +35,7 @@ export const newAgent = async(req, res) => {
 
 export const updateAgentFullInfo = async(req, res) => {
     try {
-        const {id} = req.params;
+        const {id} = req.agent.id;
         if(!id){
             return res.status(400).json({success: false, message: 'Please Provide Primary Key of Record'});
         };
