@@ -13,11 +13,19 @@ const Agent = sequelize.define('agents', {
         unique: true,
         allowNull: false
     },
+    lab_id: {
+        type: DataTypes.UUID,
+        references: {
+            model: 'labs',
+            key: 'id'
+        },
+        allowNull: true
+    },
     name: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    os: {
+    o_s: {
         type:DataTypes.STRING,
         allowNull: true
     },
@@ -47,7 +55,7 @@ const Agent = sequelize.define('agents', {
     },
     mac_address: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     status: {
         type: DataTypes.ENUM('active', 'inactive'),

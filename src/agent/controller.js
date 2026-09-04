@@ -10,21 +10,11 @@ export const newAgent = async(req, res) => {
         const code = await crypto.randomInt(0, 10000).toString().padStart(4, '0');
         const new_agent = await Agent.create({
             agent_id: code,
-            name,
-            os,
-            os_version,
-            architecture,
-            cpu,
-            ram_total,
-            disk_total,
-            ip_address,
-            mac_address,
-            status,
-            last_seen
+            name
         });
         return res.status(201).json({success: true, message: 'Created agent record', agent: new_agent});
     } catch (error) {
-        console.error('Failed to create an agent');
+        console.error(`Failed to create an agent record ${error}`);
         return res.status(500).json({
             success: false,
             message: 'Internal Server Error',
