@@ -33,7 +33,7 @@ export const signIn = async(req, res) => {
             return res.status(401).json({success: false, message: 'Invalid credentials'})
         }
         const token = jwt.sign({id: user.id, email: user.email, role: user.role}, process.env.ACCESS_TOKEN, {expiresIn: '1h'});
-        return res.status(200).json({success: true, message: 'User signed in successfully', token: token});
+        return res.status(200).json({success: true, message: 'User signed in successfully',token: token});
     } catch(error) {
         console.error(`Error with signing in user ${error}`);
         return res.status(500).json({success: false, message: 'Internal Server Error'})
