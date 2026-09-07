@@ -19,7 +19,7 @@ const Agent = sequelize.define('agents', {
             model: 'labs',
             key: 'id'
         },
-        allowNull: true
+        allowNull: true        
     },
     name: {
         type: DataTypes.STRING,
