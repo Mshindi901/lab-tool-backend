@@ -1,7 +1,9 @@
 import Agent from "./schema.js";
 import crypto from 'crypto';
+import logger from "../utils/logger.js";
 
 export const newAgent = async(req, res) => {
+
     try {
         const {name} = req.body
         if(!name){
@@ -13,8 +15,10 @@ export const newAgent = async(req, res) => {
             name
         });
         return res.status(201).json({success: true, message: 'Created agent record', agent: new_agent});
+        logger.info('Agent Created successfully');
     } catch (error) {
         console.error(`Failed to create an agent record ${error}`);
+        logger.error(`Error with agent creation ${error.message}`);       
         return res.status(500).json({
             success: false,
             message: 'Internal Server Error',
@@ -31,6 +35,7 @@ export const getLabAgents = async(req, res) => {
         };
         const agents = await Agent.findAll({where:{lab_id: id}});
         if(!agents || agents.length === 0){
+            logger.warn('No agents Fetched By Lab ID')
             return res.status(404).json({success: false, message: 'No agents found'})
         };
         return res.status(200).json({success: true, message: 'fetched agents', data: agents});
